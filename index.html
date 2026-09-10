@@ -81,7 +81,8 @@
   .tile:hover{ transform:translateY(-3px); }
   .tile b{ font-size:14.5px; position:relative; }
   .tile small{ font-size:11.5px; opacity:.85; position:relative; }
-  .tile svg{ position:absolute; right:10px; top:10px; width:44px; height:44px; opacity:.85; }
+  .tile svg{ position:relative; width:22px; height:22px; }
+  .tile-icon{ position:absolute; right:10px; top:10px; width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,0.16); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,0.35); box-shadow:0 4px 14px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.25); display:flex; align-items:center; justify-content:center; }
   .t1{ background:linear-gradient(120deg,#1F5E56,#2E7A6E); }
   .t2{ background:linear-gradient(120deg,#1C3B47,#2A5566); }
   .t3{ background:linear-gradient(120deg,#8A6A26,#C79A3B); }
@@ -742,7 +743,7 @@
   tiles.forEach(t => {
     const el = document.createElement('div');
     el.className = 'tile ' + t.cls;
-    el.innerHTML = `${t.svg}<b>${t.b}</b><small>${t.s}</small>`;
+    el.innerHTML = `<div class="tile-icon">${t.svg}</div><b>${t.b}</b><small>${t.s}</small>`;
     tilegrid.appendChild(el);
   });
 
