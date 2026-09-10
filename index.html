@@ -15,17 +15,18 @@
     --alert:#C0503F; --alert-bg:#F8E7E3;
   }
   *{box-sizing:border-box;}
-  body{ margin:0; background:var(--bg); color:var(--ink); font-family:'Work Sans', sans-serif; line-height:1.5; overflow-x:hidden; }
+  html{ overflow-x:hidden; width:100%; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:'Work Sans', sans-serif; line-height:1.5; overflow-x:hidden; max-width:100%; }
   h1,h2,h3{ font-family:'Fraunces', serif; font-weight:500; margin:0; color:var(--ink); }
   a{ color:inherit; text-decoration:none; }
   .wrap{ max-width:1120px; margin:0 auto; padding:0 24px; }
   button{ font-family:inherit; cursor:pointer; border:none; }
 
   /* Top strip with chevrons */
-  .topstrip{ background:var(--brand-dark); color:#EAF3EF; font-size:12.5px; }
-  .topstrip .wrap{ display:flex; align-items:center; justify-content:center; gap:14px; padding-top:7px; padding-bottom:7px; }
+  .topstrip{ background:var(--brand-dark); color:#EAF3EF; font-size:12.5px; overflow:hidden; }
+  .topstrip .wrap{ display:flex; align-items:center; justify-content:center; gap:10px; padding-top:7px; padding-bottom:7px; }
   .ts-chev{ background:none; color:#9FC3B8; font-size:14px; padding:0 4px; }
-  #tsMsg{ min-width:280px; text-align:center; }
+  #tsMsg{ text-align:center; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 
   header{ background:var(--bg); border-bottom:1px solid var(--line); position:sticky; top:0; z-index:30; }
   .headrow{ display:flex; align-items:center; gap:22px; padding:14px 0; }
