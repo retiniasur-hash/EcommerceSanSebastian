@@ -318,6 +318,8 @@
   .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
 
   @media (max-width: 900px){
+    .wafloat{ width:48px; height:48px; font-size:22px; bottom:16px; right:16px; }
+    .chatpanel{ bottom:74px; right:16px; width:calc(100vw - 32px); }
     .hslide{ grid-template-columns:1fr; padding:30px 26px; min-height:auto; }
     .hslide .art{ display:none; }
     .hslide h1{ font-size:25px; }
@@ -710,8 +712,7 @@
   const heroSlidesData = [
     {type:'image', src:'images/banner-1.jpg', alt:'Atenci\u00f3n integral para adultos mayores', target:'catalogo'},
     {type:'image', src:'images/banner-2.jpg', alt:'Despacho a domicilio r\u00e1pido y seguro', target:'catalogo'},
-    {type:'image', src:'images/banner-3.jpg', alt:'Vitaminas y suplementos para el foco mental', target:'catalogo'},
-    {type:'illustration', cls:'hs4', art:'cold', h:'Cadena de fr\u00edo garantizada.', p:'Insulinas y medicamentos refrigerados viajan con embalaje t\u00e9rmico desde nuestro local hasta tu refrigerador.', cta:'Ver refrigerados', target:'catalogo'}
+    {type:'image', src:'images/banner-3.jpg', alt:'Vitaminas y suplementos para el foco mental', target:'catalogo'}
   ];
   const htrack = document.getElementById('htrack');
   heroSlidesData.forEach(s => {
