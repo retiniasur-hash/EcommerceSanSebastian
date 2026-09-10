@@ -126,12 +126,14 @@
   /* Catalog grid */
   .cats{ padding:34px 0 6px; }
   .cats h2{ font-size:22px; margin-bottom:16px; }
-  .catgrid{ display:grid; grid-template-columns:repeat(8,1fr); gap:12px; }
-  .catitem{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:16px 8px 12px; text-align:center; cursor:pointer; transition:all .15s; }
+  .catgrid{ display:flex; gap:12px; overflow-x:auto; scroll-behavior:smooth; padding-bottom:8px; -webkit-overflow-scrolling:touch; }
+  .catgrid::-webkit-scrollbar{ height:6px; }
+  .catgrid::-webkit-scrollbar-thumb{ background:var(--line); border-radius:6px; }
+  .catitem{ flex:0 0 108px; background:#fff; border:1px solid var(--line); border-radius:14px; padding:16px 8px 12px; text-align:center; cursor:pointer; transition:all .15s; }
   .catitem:hover{ border-color:var(--brand); transform:translateY(-2px); }
   .catitem.active{ background:var(--brand); border-color:var(--brand); }
   .catitem.active .catlabel{ color:#fff; }
-  .catitem .catico{ width:44px; height:44px; border-radius:50%; background:var(--brand-light); display:flex; align-items:center; justify-content:center; margin:0 auto 8px; }
+  .catitem .catico{ width:44px; height:44px; border-radius:50%; background:rgba(31,94,86,0.10); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); border:1px solid rgba(31,94,86,0.16); box-shadow:inset 0 1px 0 rgba(255,255,255,0.5); display:flex; align-items:center; justify-content:center; margin:0 auto 8px; }
   .catitem .catico svg{ width:24px; height:24px; }
   .catitem.active .catico{ background:rgba(255,255,255,.22); }
   .catlabel{ font-size:11.5px; font-weight:500; color:var(--ink); line-height:1.3; }
@@ -326,7 +328,7 @@
     .hslide h1{ font-size:25px; }
     .harrow{ display:none; }
     .tilegrid{ grid-template-columns:repeat(2,1fr); }
-    .catgrid{ grid-template-columns:repeat(4,1fr); }
+    .catitem{ flex:0 0 92px; }
     .pgrid{ grid-template-columns:repeat(2,1fr); }
     .calcbox{ grid-template-columns:1fr; }
     .impgrid{ grid-template-columns:1fr; gap:28px; }
@@ -401,7 +403,13 @@
 
 <section class="cats">
   <div class="wrap">
-    <h2>Compra por área de salud</h2>
+    <div class="sec-head">
+      <h2>Compra por área de salud</h2>
+      <span class="navbtns">
+        <button onclick="scrollRow('catGrid',-1)">‹</button>
+        <button onclick="scrollRow('catGrid',1)">›</button>
+      </span>
+    </div>
     <div class="catgrid" id="catGrid"></div>
   </div>
 </section>
