@@ -377,24 +377,6 @@
   <div class="herodots" id="herodots"></div>
 </div>
 
-<section class="familybar">
-  <div class="wrap">
-    <span class="fb-label">Comprando para:</span>
-    <div class="fb-pills" id="fbPills"></div>
-  </div>
-</section>
-
-<section class="welcomewrap">
-  <div class="wrap welcomegrid">
-    <div class="wcard reorder">
-      <div class="wctitle">Tu último pedido</div>
-      <div class="items" id="reorderItems"></div>
-      <button class="btn-mini" id="repeatOrderBtn">🔁 Repetir pedido</button>
-    </div>
-    <div id="reminderCard"></div>
-  </div>
-</section>
-
 <section class="tiles">
   <div class="wrap tilegrid" id="tilegrid"></div>
 </section>
@@ -984,7 +966,7 @@
     btn.addEventListener('click', () => btn.parentElement.classList.toggle('open'));
   });
 
-  /* ============ Family profile switcher + recompra + recordatorio ============ */
+  /* ============ Datos de perfiles familiares (uso interno del asistente de WhatsApp) ============ */
   const familyProfiles = [
     {id:'me', name:'Tú', av:'🙂', lastOrder:[{id:1,qty:2},{id:5,qty:1},{id:9,qty:1}], treatment:null},
     {id:'mom', name:'Marisol · Mamá', av:'👩', lastOrder:[{id:2,qty:1},{id:15,qty:1}], treatment:{name:'Losartán 50mg', days:3}},
@@ -992,51 +974,6 @@
     {id:'son', name:'Tomás · Hijo', av:'🧒', lastOrder:[{id:4,qty:1},{id:9,qty:2}], treatment:null}
   ];
   let activeProfileId = 'me';
-
-  const fbPills = document.getElementById('fbPills');
-  familyProfiles.forEach(f => {
-    const pill = document.createElement('div');
-    pill.className = 'fb-pill' + (f.id === activeProfileId ? ' active' : '');
-    pill.dataset.id = f.id;
-    pill.innerHTML = `<span class="av">${f.av}</span>${f.name}`;
-    pill.addEventListener('click', () => { activeProfileId = f.id; renderFamilyUI(); });
-    fbPills.appendChild(pill);
-  });
-
-  function renderFamilyUI(){
-    document.querySelectorAll('.fb-pill').forEach(p => p.classList.toggle('active', p.dataset.id === activeProfileId));
-    const profile = familyProfiles.find(f => f.id === activeProfileId);
-
-    // Reorder card
-    const itemsWrap = document.getElementById('reorderItems');
-    itemsWrap.innerHTML = profile.lastOrder.slice(0,3).map(it => {
-      const p = products.find(x => x.id === it.id);
-      return `<div class="mini">${productSVG(p)}</div>`;
-    }).join('') + (profile.lastOrder.length > 3 ? `<div class="mini more">+${profile.lastOrder.length-3}</div>` : '');
-
-    // Reminder card
-    const remWrap = document.getElementById('reminderCard');
-    if(profile.treatment){
-      remWrap.innerHTML = `
-        <div class="wcard reminder">
-          <div class="wctitle">Recordatorio de tratamiento</div>
-          <p>A <b>${profile.name.split(' · ')[0]}</b> se le acaba <b>${profile.treatment.name}</b> en ${profile.treatment.days} día${profile.treatment.days===1?'':'s'}. ¿Preparamos el pedido?</p>
-          <button class="btn-mini" id="remReorderBtn">Confirmar por WhatsApp</button>
-        </div>`;
-      document.getElementById('remReorderBtn').addEventListener('click', () => openChatWithMessage(`Hola, quiero confirmar el pedido de ${profile.treatment.name} para ${profile.name.split(' · ')[0]}.`));
-    } else {
-      remWrap.innerHTML = `<div class="wcard empty-rem">Sin tratamientos crónicos activos<br>para este perfil por ahora.</div>`;
-    }
-  }
-  document.getElementById('repeatOrderBtn').addEventListener('click', () => {
-    const profile = familyProfiles.find(f => f.id === activeProfileId);
-    profile.lastOrder.forEach(it => { cart[it.id] = (cart[it.id] || 0) + it.qty; });
-    updateCartUI();
-    overlay.classList.add('open'); drawer.classList.add('open');
-    const badge = document.getElementById('cartBadge');
-    badge.classList.add('bump'); setTimeout(() => badge.classList.remove('bump'), 150);
-  });
-  renderFamilyUI();
 
   /* ============ Delivery method toggle ============ */
   let deliveryMethod = 'delivery';
@@ -1210,7 +1147,6 @@
       phoneInput.value = '';
       showToast('✅ ¡Bienvenido de nuevo! Te reconocimos por tu número');
       activeProfileId = 'me';
-      renderFamilyUI();
     } else {
       otpError.classList.add('show');
     }
